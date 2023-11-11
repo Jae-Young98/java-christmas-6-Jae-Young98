@@ -1,5 +1,7 @@
 package christmas.domain.enums;
 
+import java.util.Arrays;
+
 public enum Menu {
     BUTTON_MUSHROOM_SOUP("양송이수프", 6000),
     TAPAS("타파스", 5500),
@@ -21,6 +23,11 @@ public enum Menu {
     Menu(String name, int price) {
         this.name = name;
         this.price = price;
+    }
+
+    public static boolean isContainMenu(String inputName) {
+        return Arrays.stream(Menu.values())
+                .anyMatch(menu -> menu.name.equals(inputName));
     }
 
     public String getName() {
