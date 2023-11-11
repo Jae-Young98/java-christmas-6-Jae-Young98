@@ -25,4 +25,15 @@ public class VisitDateTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
     }
+
+    @DisplayName("입력받은 날짜를 요일로 바꾼다.")
+    @Test
+    void dateToDay() {
+        // given
+        VisitDate visitDate = new VisitDate(25);
+        String expectedDay = "MONDAY";
+
+        // when, then
+        assertThat(visitDate.getDay()).isEqualTo(expectedDay);
+    }
 }
