@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.domain.enums.CategoryGroup;
+import christmas.domain.enums.Menu;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,5 +37,15 @@ public class Order {
         return order.stream()
                 .mapToInt(OrderMenu::getQuantity)
                 .sum();
+    }
+
+    public int getAmountBeforeDiscount() {
+        return order.stream()
+                .mapToInt(this::calculateOrderMenuAmount)
+                .sum();
+    }
+
+    private int calculateOrderMenuAmount(OrderMenu orderMenu) {
+        return orderMenu.calculatePrice(Menu.getMenuPrice(orderMenu.getMenu()));
     }
 }
