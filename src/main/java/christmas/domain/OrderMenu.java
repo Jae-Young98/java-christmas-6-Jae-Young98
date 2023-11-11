@@ -29,6 +29,10 @@ public class OrderMenu {
         }
     }
 
+    public int calculatePrice(int price) {
+        return price * quantity;
+    }
+
     public String getMenu() {
         return menu;
     }
