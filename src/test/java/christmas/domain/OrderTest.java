@@ -58,4 +58,19 @@ public class OrderTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.");
     }
+
+    @DisplayName("할인 전 총주문 금액 계산")
+    @Test
+    void getAmountBeforeDiscount() {
+        // given
+        OrderMenu menu1 = new OrderMenu("바비큐립", 3);
+        OrderMenu menu2 = new OrderMenu("타파스", 2);
+        order.addMenu(menu1);
+        order.addMenu(menu2);
+
+        // when
+        int amount = order.getAmountBeforeDiscount();
+
+        assertThat(amount).isEqualTo(173000);
+    }
 }
