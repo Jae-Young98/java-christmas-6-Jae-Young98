@@ -25,6 +25,14 @@ public enum Menu {
         this.price = price;
     }
 
+    public static int getMenuPrice(String name) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.name.equals(name))
+                .findFirst()
+                .map(Menu::getPrice)
+                .orElse(NONE.price);
+    }
+
     public static boolean isContainMenu(String inputName) {
         return Arrays.stream(Menu.values())
                 .anyMatch(menu -> menu.name.equals(inputName));
