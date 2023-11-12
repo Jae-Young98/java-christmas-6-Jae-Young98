@@ -52,7 +52,7 @@ public class Order {
     }
 
     public boolean canGift() {
-        return getAmountBeforeDiscount() >= 25000;
+        return getAmountBeforeDiscount() >= 120000;
     }
 
     public List<OrderMenu> getOrder() {
