@@ -17,7 +17,7 @@ public class Discount {
 
     public int getAmountAfterDiscount() {
         int beforeDiscount = getAmountBeforeDiscount();
-        return beforeDiscount - calculateAllDiscount();
+        return beforeDiscount + calculateAllDiscount();
     }
 
     private int getAmountBeforeDiscount() {
@@ -31,7 +31,7 @@ public class Discount {
     private int calculateDay() {
         int date = getDate();
         if (date <= 25) {
-            return 1000 + (date - 1) * 100;
+            return -1000 - (date - 1) * 100;
         }
         return 0;
     }
@@ -40,7 +40,7 @@ public class Discount {
         Month month = Month.getDayType(getDay());
         List<OrderMenu> orderMenus = order.getOrder();
         if (month == Month.WEEKDAY) {
-            return 2023 * CategoryGroup.calculateTotalQuantity(orderMenus, CategoryGroup.DESSERT);
+            return -2023 * CategoryGroup.calculateTotalQuantity(orderMenus, CategoryGroup.DESSERT);
         }
         return 0;
     }
@@ -49,21 +49,21 @@ public class Discount {
         Month month = Month.getDayType(getDay());
         List<OrderMenu> orderMenus = order.getOrder();
         if (month == Month.WEEKEND) {
-            return 2023 * CategoryGroup.calculateTotalQuantity(orderMenus, CategoryGroup.MAIN);
+            return -2023 * CategoryGroup.calculateTotalQuantity(orderMenus, CategoryGroup.MAIN);
         }
         return 0;
     }
 
     private int calculateSpecial() {
         if (Month.isSpecial(visitDate.getDay())) {
-            return 1000;
+            return -1000;
         }
         return 0;
     }
 
     private int calculateChristmas() {
         if (visitDate.isChristmas()) {
-            return 1000;
+            return -1000;
         }
         return 0;
     }
@@ -82,7 +82,7 @@ public class Discount {
 
     private int calculateGift() {
         if (order.canGift()) {
-            return 25000;
+            return -25000;
         }
         return 0;
     }
