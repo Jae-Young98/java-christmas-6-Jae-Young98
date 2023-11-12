@@ -23,6 +23,10 @@ public enum Month {
                 .orElse(NONE);
     }
 
+    public static boolean isSpecial(String day) {
+        return SPECIAL.week.contains(day);
+    }
+
     private boolean containDay(String day) {
         return week.contains(day);
     }

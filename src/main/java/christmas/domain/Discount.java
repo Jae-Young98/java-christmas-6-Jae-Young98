@@ -40,6 +40,13 @@ public class Discount {
         return 0;
     }
 
+    private int calculateSpecial() {
+        if (Month.isSpecial(visitDate.getDay())) {
+            return 1000;
+        }
+        return 0;
+    }
+
     private int getDate() {
         return visitDate.getDate();
     }
