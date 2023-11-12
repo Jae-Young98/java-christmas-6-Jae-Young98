@@ -61,4 +61,11 @@ public class Discount {
     private String getDay() {
         return visitDate.getDay();
     }
+
+    public int calculateGift() {
+        if (order.canGift()) {
+            return 25000;
+        }
+        return 0;
+    }
 }
