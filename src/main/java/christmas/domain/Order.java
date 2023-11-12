@@ -51,6 +51,10 @@ public class Order {
         return orderMenu.calculatePrice(Menu.getMenuPrice(orderMenu.getMenu()));
     }
 
+    public boolean canJoinEvent() {
+        return getAmountBeforeDiscount() >= 10000;
+    }
+
     public boolean canGift() {
         return getAmountBeforeDiscount() >= 120000;
     }
