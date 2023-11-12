@@ -47,6 +47,13 @@ public class Discount {
         return 0;
     }
 
+    private int calculateChristmas() {
+        if (visitDate.isChristmas()) {
+            return 1000;
+        }
+        return 0;
+    }
+
     private int getDate() {
         return visitDate.getDate();
     }
