@@ -1,6 +1,7 @@
 package christmas.domain.enums;
 
 import christmas.domain.OrderMenu;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +19,22 @@ public enum CategoryGroup {
     CategoryGroup(String category, List<Menu> menus) {
         this.category = category;
         this.menus = menus;
+    }
+
+    public static int calculateTotalQuantity(List<OrderMenu> orderMenus, CategoryGroup category) {
+        int totalQuantity = 0;
+
+        for (OrderMenu orderMenu : orderMenus) {
+            if (isContainMenu(orderMenu, category)) {
+                totalQuantity += orderMenu.getQuantity();
+            }
+        }
+        return totalQuantity;
+    }
+
+    private static boolean isContainMenu(OrderMenu orderMenu, CategoryGroup category) {
+        return category.menus.stream()
+                .anyMatch(menu -> menu.getName().equals(orderMenu.getMenu()));
     }
 
     public static boolean containOnlyDrink(List<OrderMenu> orderMenus) {
