@@ -73,4 +73,20 @@ public class OrderTest {
 
         assertThat(amount).isEqualTo(173000);
     }
+
+    @DisplayName("총 주문 금액이 10000원 미만이면 이벤트 참여가 불가능하다.")
+    @Test
+    void canJoinEvent() {
+        // given
+        OrderMenu menu1 = new OrderMenu("아이스크림", 1);
+        OrderMenu menu2 = new OrderMenu("제로콜라", 1);
+        order.addMenu(menu1);
+        order.addMenu(menu2);
+
+        // when
+        boolean canEvent = order.canJoinEvent();
+
+        // then
+        assertThat(canEvent).isFalse();
+    }
 }
