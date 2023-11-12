@@ -2,7 +2,9 @@ package christmas.domain;
 
 import christmas.domain.enums.CategoryGroup;
 import christmas.domain.enums.Menu;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Order {
@@ -47,5 +49,9 @@ public class Order {
 
     private int calculateOrderMenuAmount(OrderMenu orderMenu) {
         return orderMenu.calculatePrice(Menu.getMenuPrice(orderMenu.getMenu()));
+    }
+
+    public List<OrderMenu> getOrder() {
+        return Collections.unmodifiableList(order);
     }
 }
