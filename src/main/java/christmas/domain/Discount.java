@@ -24,6 +24,10 @@ public class Discount {
         return order.getAmountBeforeDiscount();
     }
 
+    public int getDiscountAmount() {
+        return calculateAllDiscount() + calculateGift();
+    }
+
     private int calculateAllDiscount() {
         return calculateDay() + calculateWeek() + calculateWeekend() + calculateSpecial() + calculateChristmas();
     }
