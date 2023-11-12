@@ -3,6 +3,7 @@ package christmas.domain;
 import christmas.domain.enums.CategoryGroup;
 import christmas.domain.enums.Month;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Discount {
@@ -12,6 +13,24 @@ public class Discount {
     public Discount(final VisitDate visitDate, final Order order) {
         this.visitDate = visitDate;
         this.order = order;
+    }
+
+    public int getAmountAfterDiscount() {
+        int beforeDiscount = getAmountBeforeDiscount();
+        int dayDiscount = calculateDay();
+        int weekDiscount = calculateWeek();
+        int weekendDiscount = calculateWeekend();
+        int specialDiscount = calculateSpecial();
+        int christmasDiscount = calculateChristmas();
+        return beforeDiscount - dayDiscount - weekDiscount - weekendDiscount - specialDiscount - christmasDiscount;
+    }
+
+    private int getAmountBeforeDiscount() {
+        return order.getAmountBeforeDiscount();
+    }
+
+    private int calculateAllDiscount() {
+        return calculateDay() + calculateWeek() + calculateSpecial() + calculateChristmas();
     }
 
     private int calculateDay() {
