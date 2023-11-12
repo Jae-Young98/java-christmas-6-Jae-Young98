@@ -18,10 +18,14 @@ public class VisitDate {
     }
 
     public String getDay() {
-        LocalDate localDate = LocalDate.of(2023, 12, this.date);
+        LocalDate localDate = LocalDate.of(2023, 12, date);
         DayOfWeek day = localDate.getDayOfWeek();
 
         return day.toString();
+    }
+
+    public boolean isChristmas() {
+        return date == 25;
     }
 
     public int getDate() {
