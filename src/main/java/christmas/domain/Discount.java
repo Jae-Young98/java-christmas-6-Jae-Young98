@@ -17,12 +17,7 @@ public class Discount {
 
     public int getAmountAfterDiscount() {
         int beforeDiscount = getAmountBeforeDiscount();
-        int dayDiscount = calculateDay();
-        int weekDiscount = calculateWeek();
-        int weekendDiscount = calculateWeekend();
-        int specialDiscount = calculateSpecial();
-        int christmasDiscount = calculateChristmas();
-        return beforeDiscount - dayDiscount - weekDiscount - weekendDiscount - specialDiscount - christmasDiscount;
+        return beforeDiscount - calculateAllDiscount();
     }
 
     private int getAmountBeforeDiscount() {
@@ -30,7 +25,7 @@ public class Discount {
     }
 
     private int calculateAllDiscount() {
-        return calculateDay() + calculateWeek() + calculateSpecial() + calculateChristmas();
+        return calculateDay() + calculateWeek() + calculateWeekend() + calculateSpecial() + calculateChristmas();
     }
 
     private int calculateDay() {
@@ -86,5 +81,17 @@ public class Discount {
             return 25000;
         }
         return 0;
+    }
+
+    public List<Integer> getDiscountResult() {
+        List<Integer> result = new ArrayList<>();
+        result.add(calculateDay());
+        result.add(calculateWeek());
+        result.add(calculateWeekend());
+        result.add(calculateSpecial());
+        result.add(calculateChristmas());
+        result.add(calculateGift());
+
+        return result;
     }
 }
