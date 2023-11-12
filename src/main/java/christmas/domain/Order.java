@@ -51,6 +51,10 @@ public class Order {
         return orderMenu.calculatePrice(Menu.getMenuPrice(orderMenu.getMenu()));
     }
 
+    public boolean canGift() {
+        return getAmountBeforeDiscount() >= 25000;
+    }
+
     public List<OrderMenu> getOrder() {
         return Collections.unmodifiableList(order);
     }
