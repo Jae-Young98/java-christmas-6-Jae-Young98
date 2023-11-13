@@ -41,6 +41,7 @@ public class EventController {
         showBenefitResult(discount);
         showBenefitAmount(discount);
         showAfterDiscountAmount(discount);
+        showBadge(discount);
     }
 
     private VisitDate getVisitDate() {
@@ -114,5 +115,10 @@ public class EventController {
 
     private void showAfterDiscountAmount(Discount discount) {
         outputView.printAfterDiscountAmount(discount.getAmountAfterDiscount());
+    }
+
+    private void showBadge(Discount discount) {
+        int discountAmount = discount.getDiscountAmount();
+        outputView.printBadge(Badge.getBadge(discountAmount));
     }
 }

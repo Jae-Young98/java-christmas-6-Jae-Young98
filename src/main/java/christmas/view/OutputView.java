@@ -50,4 +50,9 @@ public class OutputView {
         System.out.println(String.format("%,d원", amount));
         System.out.println();
     }
+
+    public void printBadge(String badge) {
+        System.out.println("<12월 이벤트 배지>");
+        System.out.println(badge);
+    }
 }
