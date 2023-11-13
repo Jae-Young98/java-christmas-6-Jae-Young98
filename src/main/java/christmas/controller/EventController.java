@@ -40,6 +40,7 @@ public class EventController {
         Discount discount = new Discount(visitDate, order);
         showBenefitResult(discount);
         showBenefitAmount(discount);
+        showAfterDiscountAmount(discount);
     }
 
     private VisitDate getVisitDate() {
@@ -109,5 +110,9 @@ public class EventController {
 
     private void showBenefitAmount(Discount discount) {
         outputView.printBenefitAmount(discount.getDiscountAmount());
+    }
+
+    private void showAfterDiscountAmount(Discount discount) {
+        outputView.printAfterDiscountAmount(discount.getAmountAfterDiscount());
     }
 }
