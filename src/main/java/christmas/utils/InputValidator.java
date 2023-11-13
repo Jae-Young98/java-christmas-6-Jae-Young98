@@ -1,7 +1,5 @@
 package christmas.utils;
 
-import java.util.List;
-
 public class InputValidator {
     private static final String DELIMITER_COMMA = ",";
     private static final String DIGIT_REGEX = "^[0-9]+$";

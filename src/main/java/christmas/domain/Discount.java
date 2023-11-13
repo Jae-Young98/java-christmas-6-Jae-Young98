@@ -64,13 +64,6 @@ public class Discount {
         return 0;
     }
 
-    private int calculateChristmas() {
-        if (visitDate.isChristmas()) {
-            return -1000;
-        }
-        return 0;
-    }
-
     private int getDate() {
         return visitDate.getDate();
     }
@@ -92,6 +85,7 @@ public class Discount {
 
     public List<Integer> getDiscountResult() {
         List<Integer> result = new ArrayList<>();
+
         if (!order.canJoinEvent()) {
             return result;
         }
