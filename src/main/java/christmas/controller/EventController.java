@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
+import christmas.domain.enums.Menu;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class EventController {
         inputView.showGreeting();
         VisitDate visitDate = getVisitDate();
         Order order = getOrder();
+        showOrderStatus(visitDate, order);
     }
 
     private VisitDate getVisitDate() {
@@ -67,5 +69,19 @@ public class EventController {
             System.out.println(e.getMessage());
             return getMenus();
         }
+    }
+
+    private void showOrderStatus(VisitDate visitDate, Order order) {
+        outputView.showIntroduce(visitDate.getDate());
+        outputView.showOrderMenus(order.getOrder());
+        outputView.showAmountBeforeDiscount(order.getAmountBeforeDiscount());
+        showGift(order);
+    }
+
+    private void showGift(Order order) {
+        if (order.canGift()) {
+            outputView.showGiftStatus(Menu.CHAMPAGNE.getName() + " 1개");
+        }
+        outputView.showGiftStatus(Menu.NONE.getName());
     }
 }
