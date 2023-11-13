@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.Badge;
 import christmas.domain.Discount;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
@@ -8,12 +9,15 @@ import christmas.domain.enums.DiscountMessage;
 import christmas.domain.enums.Menu;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+
 import java.util.List;
 import java.util.Map;
 
 public class EventController {
     private final InputView inputView;
     private final OutputView outputView;
+    private VisitDate visitDate;
+    private Order order;
 
     public EventController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -22,14 +26,20 @@ public class EventController {
 
     public void run() {
         initialize();
+        makeResult();
     }
 
     private void initialize() {
         inputView.showGreeting();
-        VisitDate visitDate = getVisitDate();
-        Order order = getOrder();
-        showOrderStatus(visitDate, order);
-        showDiscountResult(visitDate, order);
+        visitDate = getVisitDate();
+        order = getOrder();
+        showOrderStatus();
+    }
+
+    private void makeResult() {
+        Discount discount = new Discount(visitDate, order);
+        showBenefitResult(discount);
+        showBenefitAmount(discount);
     }
 
     private VisitDate getVisitDate() {
@@ -54,10 +64,12 @@ public class EventController {
     private Order getOrder() {
         try {
             Order order = new Order();
+
             Map<String, Integer> inputMenus = getMenus();
             inputMenus.forEach((name, count) -> {
                 order.addMenu(new OrderMenu(name, count));
             });
+
             order.check();
             return order;
         } catch (IllegalArgumentException e) {
@@ -75,14 +87,14 @@ public class EventController {
         }
     }
 
-    private void showOrderStatus(VisitDate visitDate, Order order) {
+    private void showOrderStatus() {
         outputView.showIntroduce(visitDate.getDate());
         outputView.showOrderMenus(order.getOrder());
         outputView.showAmountBeforeDiscount(order.getAmountBeforeDiscount());
-        showGift(order);
+        showGift();
     }
 
-    private void showGift(Order order) {
+    private void showGift() {
         String gift = Menu.NONE.getName();
         if (order.canGift()) {
             gift = Menu.CHAMPAGNE.getName() + " 1개";
@@ -90,9 +102,12 @@ public class EventController {
         outputView.showGiftStatus(gift);
     }
 
-    private void showDiscountResult(VisitDate visitDate, Order order) {
-        Discount discount = new Discount(visitDate, order);
+    private void showBenefitResult(Discount discount) {
         List<String> result = DiscountMessage.getDiscountResult(discount);
-        outputView.printDiscountResult(result);
+        outputView.printBenefits(result);
+    }
+
+    private void showBenefitAmount(Discount discount) {
+        outputView.printBenefitAmount(discount.getDiscountAmount());
     }
 }
