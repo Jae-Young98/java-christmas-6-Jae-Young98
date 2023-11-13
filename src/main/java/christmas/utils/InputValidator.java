@@ -8,7 +8,7 @@ public class InputValidator {
 
     public static void validateVisitDate(String number) {
         if (isNotDigit(number)) {
-            throw new IllegalArgumentException("[ERROR] 숫자만 입력 가능합니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
     }
 

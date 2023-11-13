@@ -60,7 +60,7 @@ public class Converter {
     private static void validateCount(String[] splitMenu) {
         String count = splitMenu[1].trim();
         if (isNotDigit(count)) {
-            throw new IllegalArgumentException("[ERROR] 올바르지 않은 개수 입력입니다. 숫자로 다시 입력해 주세요.");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
