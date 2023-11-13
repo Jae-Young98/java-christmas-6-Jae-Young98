@@ -33,7 +33,7 @@ public class ConverterTest {
                 .hasMessageContaining("[ERROR] 올바르지 않은 메뉴 입력입니다. 한글로 다시 입력해 주세요.");
     }
 
-    @DisplayName("메뉴 이름이 한글이 아니면 예외를 발생시킨다.")
+    @DisplayName("개수가 숫자가 아니면 예외를 발생시킨다.")
     @Test
     void validateCount() {
         // given
@@ -42,7 +42,7 @@ public class ConverterTest {
         // when, then
         assertThatThrownBy(() -> Converter.convertMap(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 올바르지 않은 개수 입력입니다. 숫자로 다시 입력해 주세요.");
+                .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
 
     @DisplayName("중복된 메뉴라면 예외를 발생시킨다.")
