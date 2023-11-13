@@ -27,4 +27,11 @@ public class OutputView {
         System.out.println("<증정 메뉴>");
         System.out.println(gift);
     }
+
+    public void printDiscountResult(List<String> result) {
+        System.out.println("<혜택 내역>");
+        for (String resultMessage : result) {
+            System.out.println(resultMessage);
+        }
+    }
 }

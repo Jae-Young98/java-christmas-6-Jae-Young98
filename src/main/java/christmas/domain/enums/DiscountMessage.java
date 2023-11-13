@@ -21,6 +21,25 @@ public enum DiscountMessage {
         this.message = message;
     }
 
+
+    public static List<String> getDiscountResult(Discount discount) {
+        List<String> resultMessage = new ArrayList<>();
+        List<Integer> result = discount.getDiscountResult();
+        if (isNoneDiscount(result)) {
+            resultMessage.add(NONE.getMessage());
+            return resultMessage;
+        }
+
+        return IntStream.range(0, result.size())
+                .filter(index -> result.get(index) != 0)
+                .mapToObj(index -> DiscountMessage.values()[index].getMessage() + result.get(index) + "원")
+                .toList();
+    }
+
+    private static boolean isNoneDiscount(List<Integer> result) {
+        return result.size() == 0;
+    }
+
     public int getIndex() {
         return index;
     }

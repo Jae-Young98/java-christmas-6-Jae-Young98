@@ -1,11 +1,14 @@
 package christmas.controller;
 
+import christmas.domain.Discount;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
+import christmas.domain.enums.DiscountMessage;
 import christmas.domain.enums.Menu;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.util.List;
 import java.util.Map;
 
 public class EventController {
@@ -26,6 +29,7 @@ public class EventController {
         VisitDate visitDate = getVisitDate();
         Order order = getOrder();
         showOrderStatus(visitDate, order);
+        showDiscountResult(visitDate, order);
     }
 
     private VisitDate getVisitDate() {
@@ -79,9 +83,16 @@ public class EventController {
     }
 
     private void showGift(Order order) {
+        String gift = Menu.NONE.getName();
         if (order.canGift()) {
-            outputView.showGiftStatus(Menu.CHAMPAGNE.getName() + " 1개");
+            gift = Menu.CHAMPAGNE.getName() + " 1개";
         }
-        outputView.showGiftStatus(Menu.NONE.getName());
+        outputView.showGiftStatus(gift);
+    }
+
+    private void showDiscountResult(VisitDate visitDate, Order order) {
+        Discount discount = new Discount(visitDate, order);
+        List<String> result = DiscountMessage.getDiscountResult(discount);
+        outputView.printDiscountResult(result);
     }
 }

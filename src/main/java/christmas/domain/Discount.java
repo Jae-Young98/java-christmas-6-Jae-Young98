@@ -17,7 +17,10 @@ public class Discount {
 
     public int getAmountAfterDiscount() {
         int beforeDiscount = getAmountBeforeDiscount();
-        return beforeDiscount + calculateAllDiscount();
+        if (order.canJoinEvent()) {
+            return beforeDiscount + calculateAllDiscount();
+        }
+        return beforeDiscount;
     }
 
     private int getAmountBeforeDiscount() {
@@ -25,7 +28,7 @@ public class Discount {
     }
 
     private int calculateAllDiscount() {
-        return calculateDay() + calculateWeek() + calculateWeekend() + calculateSpecial() + calculateChristmas();
+        return calculateDay() + calculateWeek() + calculateWeekend() + calculateSpecial();
     }
 
     private int calculateDay() {
@@ -55,7 +58,7 @@ public class Discount {
     }
 
     private int calculateSpecial() {
-        if (Month.isSpecial(visitDate.getDay())) {
+        if (Month.isSpecial(visitDate.getDay()) || visitDate.isChristmas()) {
             return -1000;
         }
         return 0;
@@ -89,11 +92,14 @@ public class Discount {
 
     public List<Integer> getDiscountResult() {
         List<Integer> result = new ArrayList<>();
+        if (!order.canJoinEvent()) {
+            return result;
+        }
+
         result.add(calculateDay());
         result.add(calculateWeek());
         result.add(calculateWeekend());
         result.add(calculateSpecial());
-        result.add(calculateChristmas());
         result.add(calculateGift());
 
         return result;
