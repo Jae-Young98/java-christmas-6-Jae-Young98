@@ -68,9 +68,9 @@ public class EventController {
             Order order = new Order();
 
             Map<String, Integer> inputMenus = getMenus();
-            inputMenus.forEach((name, count) -> {
-                order.addMenu(new OrderMenu(name, count));
-            });
+            inputMenus.entrySet().stream()
+                    .map(menu -> new OrderMenu(menu.getKey(), menu.getValue()))
+                    .forEach(order::addMenu);
 
             order.check();
             return order;
