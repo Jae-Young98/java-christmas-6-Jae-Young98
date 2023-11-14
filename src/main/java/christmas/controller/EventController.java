@@ -1,10 +1,10 @@
 package christmas.controller;
 
-import christmas.domain.Badge;
 import christmas.domain.Discount;
 import christmas.domain.Order;
 import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
+import christmas.domain.enums.Badge;
 import christmas.domain.enums.DiscountMessage;
 import christmas.domain.enums.Menu;
 import christmas.view.InputView;
@@ -119,6 +119,7 @@ public class EventController {
 
     private void showBadge(Discount discount) {
         int discountAmount = discount.getDiscountAmount();
-        outputView.printBadge(Badge.getBadge(discountAmount));
+        Badge badge = Badge.getBadge(discountAmount);
+        outputView.printBadge(badge.getName());
     }
 }
