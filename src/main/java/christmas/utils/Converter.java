@@ -1,5 +1,7 @@
 package christmas.utils;
 
+import christmas.constant.ExceptionMessage;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +44,7 @@ public class Converter {
 
     private static void validateLength(String[] splitMenu) {
         if (wrongLength(splitMenu)) {
-            throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.INPUT_MENU_EXCEPTION.getMessage());
         }
     }
 
@@ -53,14 +55,14 @@ public class Converter {
     private static void validateMenu(String[] splitMenu) {
         String menu = splitMenu[0].trim();
         if (isNotString(menu)) {
-            throw new IllegalArgumentException("[ERROR] 올바르지 않은 메뉴 입력입니다. 한글로 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.INPUT_NOT_KOREAN_EXCEPTION.getMessage());
         }
     }
 
     private static void validateCount(String[] splitMenu) {
         String count = splitMenu[1].trim();
         if (isNotDigit(count)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_EXCEPTION.getMessage());
         }
     }
 
@@ -74,7 +76,7 @@ public class Converter {
 
     private static void validateDuplicate(Map<String, Integer> map, String name) {
         if (hasDuplicate(map, name)) {
-            throw new IllegalArgumentException("[ERROR] 메뉴 이름은 중복 될 수 없습니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_ORDER_EXCEPTION.getMessage());
         }
     }
 

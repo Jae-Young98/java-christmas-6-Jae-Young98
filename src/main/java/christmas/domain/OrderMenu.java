@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.constant.ExceptionMessage;
 import christmas.domain.enums.Menu;
 
 public class OrderMenu {
@@ -19,13 +20,13 @@ public class OrderMenu {
 
     private void checkMenuName(String menu) {
         if (!Menu.isContainMenu(menu)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_EXCEPTION.getMessage());
         }
     }
 
     private void checkQuantity(int quantity) {
         if (quantity < 1) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_EXCEPTION.getMessage());
         }
     }
 

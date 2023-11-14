@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.constant.ExceptionMessage;
 import christmas.domain.enums.CategoryGroup;
 import christmas.domain.enums.Menu;
 
@@ -25,13 +26,13 @@ public class Order {
 
     private void checkOnlyDrink() {
         if (CategoryGroup.containOnlyDrink(order)) {
-            throw new IllegalArgumentException("[ERROR] 음료만 주문 할 수 없습니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.ONLY_DRINK_ORDER_EXCEPTION.getMessage());
         }
     }
 
     private void checkQuantities() {
         if (calculateAllQuantity() > 20) {
-            throw new IllegalArgumentException("[ERROR] 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.MAX_QUANTITY_ORDER_EXCEPTION.getMessage());
         }
     }
 
