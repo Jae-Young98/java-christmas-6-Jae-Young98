@@ -126,4 +126,38 @@ public class DiscountTest {
         // then
         assertThat(resultAmount).isEqualTo(expectedAmount);
     }
+
+    @DisplayName("총주문 금액이 10,000원 미만이면 할인 혜택이 적용되지 않는다.")
+    @Test
+    void noneDiscount() {
+        // given
+        VisitDate visitDate = new VisitDate(25);
+        Order noneDiscountOder = new Order();
+        noneDiscountOder.addMenu(new OrderMenu("시저샐러드", 1));
+        Discount discount = new Discount(visitDate, noneDiscountOder);
+
+        // when
+        int expectedAmount = 0;
+        int resultAmount = discount.getDiscountAmount();
+
+        // then
+        assertThat(resultAmount).isEqualTo(expectedAmount);
+    }
+
+    @DisplayName("총주문 금액이 10,000원 이상이면 할인 혜택이 적용된다.")
+    @Test
+    void canDiscount() {
+        // given
+        VisitDate visitDate = new VisitDate(25);
+        Order canDiscountOrder = new Order();
+        canDiscountOrder.addMenu(new OrderMenu("초코케이크", 1));
+        Discount discount = new Discount(visitDate, canDiscountOrder);
+
+        // when
+        int expectedAmount = -6423;
+        int resultAmount = discount.getDiscountAmount();
+
+        // then
+        assertThat(resultAmount).isEqualTo(expectedAmount);
+    }
 }
