@@ -23,6 +23,14 @@ public class Discount {
         return beforeDiscount;
     }
 
+    public int getDiscountAmount() {
+        if (!order.canJoinEvent()) {
+            return 0;
+        }
+
+        return calculateAllDiscount() + calculateGift();
+    }
+
     private int getAmountBeforeDiscount() {
         return order.getAmountBeforeDiscount();
     }
@@ -64,6 +72,13 @@ public class Discount {
         return 0;
     }
 
+    private int calculateGift() {
+        if (order.canGift()) {
+            return -25000;
+        }
+        return 0;
+    }
+
     private int getDate() {
         return visitDate.getDate();
     }
@@ -72,28 +87,17 @@ public class Discount {
         return visitDate.getDay();
     }
 
-    public int getDiscountAmount() {
-        return calculateAllDiscount() + calculateGift();
-    }
-
-    private int calculateGift() {
-        if (order.canGift()) {
-            return -25000;
-        }
-        return 0;
-    }
-
     public List<Integer> getDiscountResult() {
         if (!order.canJoinEvent()) {
             return List.of();
         }
 
         return Stream.of(
-                calculateDay(),
-                calculateWeek(),
-                calculateWeekend(),
-                calculateSpecial(),
-                calculateGift())
+                    calculateDay(),
+                    calculateWeek(),
+                    calculateWeekend(),
+                    calculateSpecial(),
+                    calculateGift())
                 .toList();
     }
 }
