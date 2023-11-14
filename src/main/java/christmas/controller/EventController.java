@@ -114,7 +114,7 @@ public class EventController {
     }
 
     private void showAfterDiscountAmount(Discount discount) {
-        outputView.printAfterDiscountAmount(discount.getAmountAfterDiscount());
+        outputView.printAmountAfterDiscount(discount.getAmountAfterDiscount());
     }
 
     private void showBadge(Discount discount) {

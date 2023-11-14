@@ -45,7 +45,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printAfterDiscountAmount(int amount) {
+    public void printAmountAfterDiscount(int amount) {
         System.out.println("<할인 후 예상 결제 금액>");
         System.out.println(String.format("%,d원", amount));
         System.out.println();
