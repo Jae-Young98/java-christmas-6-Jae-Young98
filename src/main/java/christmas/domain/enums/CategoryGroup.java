@@ -3,7 +3,6 @@ package christmas.domain.enums;
 import christmas.domain.OrderMenu;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public enum CategoryGroup {
@@ -11,7 +10,7 @@ public enum CategoryGroup {
     MAIN("메인", Arrays.asList(Menu.T_BONE_STEAK, Menu.BARBECUE_RIBS, Menu.SEAFOOD_PASTA, Menu.CHRISTMAS_PASTA)),
     DESSERT("디저트", Arrays.asList(Menu.CHOCOLATE_CAKE, Menu.ICE_CREAM)),
     DRINK("음료", Arrays.asList(Menu.ZERO_COLA, Menu.RED_WINE, Menu.CHAMPAGNE)),
-    NONE("없음", Collections.EMPTY_LIST);
+    NONE("없음", List.of());
 
     private final String category;
     private final List<Menu> menus;
