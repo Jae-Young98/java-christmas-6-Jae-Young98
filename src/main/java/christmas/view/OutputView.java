@@ -1,38 +1,54 @@
 package christmas.view;
 
+import christmas.constant.OutputMessage;
 import christmas.domain.OrderMenu;
-import java.text.DecimalFormat;
+
 import java.util.List;
 
-public class OutputView {
-    private final DecimalFormat decimalFormat = new DecimalFormat("###,###");
+import static christmas.constant.OutputMessage.AMOUNT;
+import static christmas.constant.OutputMessage.AMOUNT_AFTER_DISCOUNT_TITLE;
+import static christmas.constant.OutputMessage.AMOUNT_BEFORE_DISCOUNT_TITLE;
+import static christmas.constant.OutputMessage.BADGE_TITLE;
+import static christmas.constant.OutputMessage.BENEFITS_TITLE;
+import static christmas.constant.OutputMessage.BENEFIT_AMOUNT;
+import static christmas.constant.OutputMessage.GIFT_TITLE;
+import static christmas.constant.OutputMessage.NEW_LINE;
+import static christmas.constant.OutputMessage.ORDER_DETAIL;
 
+public class OutputView {
     public void showIntroduce(int date) {
-        System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", date);
-        System.out.println();
+        System.out.printf(OutputMessage.INTRODUCE_MESSAGE.getMessage(), date);
         System.out.println();
     }
 
     public void showOrderMenus(List<OrderMenu> orderMenus) {
-        System.out.println("<주문 메뉴>");
-        orderMenus.forEach(orderMenu -> System.out.println(orderMenu.getMenu() + " " + orderMenu.getQuantity() + "개"));
+        StringBuilder orderDetails = new StringBuilder();
+        System.out.println(OutputMessage.ORDER_TITLE.getMessage());
+
+        for (OrderMenu orderMenu : orderMenus) {
+            orderDetails.append(String.format(ORDER_DETAIL.getMessage(), orderMenu.getMenu(), orderMenu.getQuantity()))
+                    .append(NEW_LINE.getMessage());
+        }
+
+        System.out.print(orderDetails);
         System.out.println();
     }
 
     public void showAmountBeforeDiscount(int amount) {
-        System.out.println("<할인 전 총주문 금액>");
-        System.out.println(String.format("%,d원", amount));
+        System.out.println(AMOUNT_BEFORE_DISCOUNT_TITLE.getMessage());
+        System.out.printf(String.format(AMOUNT.getMessage(), amount));
+        System.out.println();
         System.out.println();
     }
 
     public void showGiftStatus(String gift) {
-        System.out.println("<증정 메뉴>");
+        System.out.println(GIFT_TITLE.getMessage());
         System.out.println(gift);
         System.out.println();
     }
 
     public void printBenefits(List<String> result) {
-        System.out.println("<혜택 내역>");
+        System.out.println(BENEFITS_TITLE.getMessage());
         for (String resultMessage : result) {
             System.out.println(resultMessage);
         }
@@ -40,19 +56,21 @@ public class OutputView {
     }
 
     public void printBenefitAmount(int amount) {
-        System.out.println("<총혜택 금액>");
-        System.out.println(String.format("%,d원", amount));
+        System.out.println(BENEFIT_AMOUNT.getMessage());
+        System.out.printf(String.format(AMOUNT.getMessage(), amount));
+        System.out.println();
         System.out.println();
     }
 
     public void printAmountAfterDiscount(int amount) {
-        System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(String.format("%,d원", amount));
+        System.out.println(AMOUNT_AFTER_DISCOUNT_TITLE.getMessage());
+        System.out.printf(String.format(AMOUNT.getMessage(), amount));
+        System.out.println();
         System.out.println();
     }
 
     public void printBadge(String badge) {
-        System.out.println("<12월 이벤트 배지>");
+        System.out.println(BADGE_TITLE.getMessage());
         System.out.println(badge);
     }
 }
