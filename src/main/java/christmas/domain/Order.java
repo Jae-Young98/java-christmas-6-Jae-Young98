@@ -13,7 +13,11 @@ public class Order {
     private static final int MIN_JOIN_EVENT_AMOUNT = 10000;
     private static final int CAN_RECEIVE_GIFT_AMOUNT = 120000;
 
-    private final List<OrderMenu> order = new ArrayList<>();
+    private final List<OrderMenu> order;
+
+    public Order() {
+        order = new ArrayList<>();
+    }
 
     public void addMenu(OrderMenu orderMenu) {
         order.add(orderMenu);
