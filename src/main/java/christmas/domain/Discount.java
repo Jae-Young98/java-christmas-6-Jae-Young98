@@ -7,6 +7,14 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class Discount {
+    private static final int NONE_PRICE = 0;
+    private static final int CHRISTMAS = 25;
+    private static final int START_CHRISTMAS_DISCOUNT_AMOUNT = -1000;
+    private static final int DAY_DISCOUNT_AMOUNT = 100;
+    private static final int UNIT_DISCOUNT_AMOUNT = -2023;
+    private static final int SPECIAL_DISCOUNT_AMOUNT = -1000;
+    private static final int GIFT_DISCOUNT_AMOUNT = -25000;
+
     private final VisitDate visitDate;
     private final Order order;
 
@@ -25,7 +33,7 @@ public class Discount {
 
     public int getDiscountAmount() {
         if (!order.canJoinEvent()) {
-            return 0;
+            return NONE_PRICE;
         }
 
         return calculateAllDiscount() + calculateGift();
@@ -41,42 +49,42 @@ public class Discount {
 
     private int calculateDay() {
         int date = getDate();
-        if (date <= 25) {
-            return -1000 - (date - 1) * 100;
+        if (date <= CHRISTMAS) {
+            return START_CHRISTMAS_DISCOUNT_AMOUNT - (date - 1) * DAY_DISCOUNT_AMOUNT;
         }
-        return 0;
+        return NONE_PRICE;
     }
 
     private int calculateWeek() {
         Month month = Month.getDayType(getDay());
         List<OrderMenu> orderMenus = order.getOrder();
         if (month == Month.WEEKDAY) {
-            return -2023 * CategoryGroup.calculateTotalQuantity(orderMenus, CategoryGroup.DESSERT);
+            return UNIT_DISCOUNT_AMOUNT * CategoryGroup.calculateTotalQuantity(orderMenus, CategoryGroup.DESSERT);
         }
-        return 0;
+        return NONE_PRICE;
     }
 
     private int calculateWeekend() {
         Month month = Month.getDayType(getDay());
         List<OrderMenu> orderMenus = order.getOrder();
         if (month == Month.WEEKEND) {
-            return -2023 * CategoryGroup.calculateTotalQuantity(orderMenus, CategoryGroup.MAIN);
+            return UNIT_DISCOUNT_AMOUNT * CategoryGroup.calculateTotalQuantity(orderMenus, CategoryGroup.MAIN);
         }
-        return 0;
+        return NONE_PRICE;
     }
 
     private int calculateSpecial() {
         if (Month.isSpecial(visitDate.getDay()) || visitDate.isChristmas()) {
-            return -1000;
+            return SPECIAL_DISCOUNT_AMOUNT;
         }
-        return 0;
+        return NONE_PRICE;
     }
 
     private int calculateGift() {
         if (order.canGift()) {
-            return -25000;
+            return GIFT_DISCOUNT_AMOUNT;
         }
-        return 0;
+        return NONE_PRICE;
     }
 
     private int getDate() {

@@ -4,6 +4,8 @@ import christmas.constant.ExceptionMessage;
 import christmas.domain.enums.Menu;
 
 public class OrderMenu {
+    private static final int MIN_ORDER_QUANTITY = 1;
+
     private final String menu;
     private final int quantity;
 
@@ -25,7 +27,7 @@ public class OrderMenu {
     }
 
     private void checkQuantity(int quantity) {
-        if (quantity < 1) {
+        if (quantity < MIN_ORDER_QUANTITY) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_EXCEPTION.getMessage());
         }
     }

@@ -9,6 +9,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class Order {
+    private static final int MAX_ORDER_QUANTITY = 20;
+    private static final int MIN_JOIN_EVENT_AMOUNT = 10000;
+    private static final int CAN_RECEIVE_GIFT_AMOUNT = 120000;
+
     private final List<OrderMenu> order = new ArrayList<>();
 
     public void addMenu(OrderMenu orderMenu) {
@@ -31,7 +35,7 @@ public class Order {
     }
 
     private void checkQuantities() {
-        if (calculateAllQuantity() > 20) {
+        if (calculateAllQuantity() > MAX_ORDER_QUANTITY) {
             throw new IllegalArgumentException(ExceptionMessage.MAX_QUANTITY_ORDER_EXCEPTION.getMessage());
         }
     }
@@ -53,11 +57,11 @@ public class Order {
     }
 
     public boolean canJoinEvent() {
-        return getAmountBeforeDiscount() >= 10000;
+        return getAmountBeforeDiscount() >= MIN_JOIN_EVENT_AMOUNT;
     }
 
     public boolean canGift() {
-        return getAmountBeforeDiscount() >= 120000;
+        return getAmountBeforeDiscount() >= CAN_RECEIVE_GIFT_AMOUNT;
     }
 
     public List<OrderMenu> getOrder() {
