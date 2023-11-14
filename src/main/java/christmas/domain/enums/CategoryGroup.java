@@ -22,14 +22,10 @@ public enum CategoryGroup {
     }
 
     public static int calculateTotalQuantity(List<OrderMenu> orderMenus, CategoryGroup category) {
-        int totalQuantity = 0;
-
-        for (OrderMenu orderMenu : orderMenus) {
-            if (isContainMenu(orderMenu, category)) {
-                totalQuantity += orderMenu.getQuantity();
-            }
-        }
-        return totalQuantity;
+        return orderMenus.stream()
+                .filter(orderMenu -> isContainMenu(orderMenu, category))
+                .mapToInt(OrderMenu::getQuantity)
+                .sum();
     }
 
     private static boolean isContainMenu(OrderMenu orderMenu, CategoryGroup category) {
@@ -38,12 +34,8 @@ public enum CategoryGroup {
     }
 
     public static boolean containOnlyDrink(List<OrderMenu> orderMenus) {
-        for (OrderMenu orderMenu : orderMenus) {
-            if (!isDrink(orderMenu)) {
-                return false;
-            }
-        }
-        return true;
+        return orderMenus.stream()
+                .allMatch(CategoryGroup::isDrink);
     }
 
     private static boolean isDrink(OrderMenu orderMenu) {
