@@ -3,8 +3,8 @@ package christmas.domain;
 import christmas.domain.enums.CategoryGroup;
 import christmas.domain.enums.Month;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Discount {
     private final VisitDate visitDate;
@@ -84,18 +84,16 @@ public class Discount {
     }
 
     public List<Integer> getDiscountResult() {
-        List<Integer> result = new ArrayList<>();
-
         if (!order.canJoinEvent()) {
-            return result;
+            return List.of();
         }
 
-        result.add(calculateDay());
-        result.add(calculateWeek());
-        result.add(calculateWeekend());
-        result.add(calculateSpecial());
-        result.add(calculateGift());
-
-        return result;
+        return Stream.of(
+                calculateDay(),
+                calculateWeek(),
+                calculateWeekend(),
+                calculateSpecial(),
+                calculateGift())
+                .toList();
     }
 }
