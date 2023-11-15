@@ -1,14 +1,13 @@
 package christmas.domain.enums;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public enum Month {
     WEEKDAY(Arrays.asList("SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY")),
     WEEKEND(Arrays.asList("FRIDAY", "SATURDAY")),
     SPECIAL(Arrays.asList("SUNDAY", "CHRISTMAS")),
-    NONE(Collections.EMPTY_LIST);
+    NONE(List.of());
 
     private final List<String> week;
 
